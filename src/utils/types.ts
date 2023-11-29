@@ -16,7 +16,8 @@ export interface IChildren {
 }
 
 export interface IAppContext {
-  questionData: IPayloadObject | Record<string, any>
+  questionData: IPayloadObject | Record<string, any>,
+  error:any
 }
 
 export interface IPayloadObject {

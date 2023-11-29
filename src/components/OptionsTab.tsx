@@ -1,4 +1,13 @@
-import { StyleSheet, FlatList, Image,  View, Text, TouchableOpacity, Pressable, PanResponder  } from 'react-native'
+import {
+    StyleSheet,
+    FlatList,
+    Image,
+    View,
+    Text,
+    TouchableOpacity,
+    Pressable,
+    PanResponder,
+} from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 import { useGetAnswer } from '../api'
 import { useQueryClient } from '@tanstack/react-query'
@@ -55,16 +64,16 @@ export function OptionsTab({ questionData }: IQuestionOption) {
             onMoveShouldSetPanResponder: () => true,
             onPanResponderMove: (_, gestureState) => {
                 if (gestureState.dy < 0) {
-                        setSelectedAnswerId('')
+                    setSelectedAnswerId('')
                 }
                 if (gestureState.dy > 50) {
-                        setSelectedAnswerId('')
+                    setSelectedAnswerId('')
                 }
             },
             onPanResponderRelease: () => {
-                    setOptions(questionOptions)
-                    setSelectedAnswerId('')
-                    queryClient.invalidateQueries({ queryKey: ['questions'] })
+                setOptions(questionOptions)
+                setSelectedAnswerId('')
+                queryClient.invalidateQueries({ queryKey: ['questions'] })
             },
         }),
     ).current
@@ -95,12 +104,15 @@ export function OptionsTab({ questionData }: IQuestionOption) {
                                         style={styles.correct_gif}
                                     />
                                 )}
-                            {item.id === selectedAnswerId && item.id !== correctAnswerId &&<Image
-                                source={{
-                                    uri: 'https://s3-alpha-sig.figma.com/img/0b81/5c65/ba4ffcacaa979db7ee513dc004374c7f?Expires=1701648000&Signature=Mv3lkhBJZ04ey5lS8UNLKZk6orNiqz3q6FqLgplOWaTMjSBdGcIBwwow0MEiOCiyqVpAA87iaiaX6cpJI7ohFhh7o2406pq0E593qJPqRveM-jvtuEeyxrNvAgKSP50ajX8NuGWUdpMDkx4yL1o3yxdvrH58ezU-0XUNrkyjAdFv~AzBdOlxgj0FqBNpJ5i3qr08Wox4FQW33dioJ8qWc3HF3t4kEr8fO59O-~ad-ppbs-KA9nALig9mVWhuyT18NdeYaqT50t3t9vAmbGR7Nc-1c0J5Nnhbnp~ViUtKaHblXs-jrOTJWYi0nLJ-FZpZxu8JtuM-gO-yf-IEWVl-oA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
-                                }}
-                                style={styles.incorrect_gif}
-                            />}
+                            {item.id === selectedAnswerId &&
+                                item.id !== correctAnswerId && (
+                                    <Image
+                                        source={{
+                                            uri: 'https://s3-alpha-sig.figma.com/img/0b81/5c65/ba4ffcacaa979db7ee513dc004374c7f?Expires=1701648000&Signature=Mv3lkhBJZ04ey5lS8UNLKZk6orNiqz3q6FqLgplOWaTMjSBdGcIBwwow0MEiOCiyqVpAA87iaiaX6cpJI7ohFhh7o2406pq0E593qJPqRveM-jvtuEeyxrNvAgKSP50ajX8NuGWUdpMDkx4yL1o3yxdvrH58ezU-0XUNrkyjAdFv~AzBdOlxgj0FqBNpJ5i3qr08Wox4FQW33dioJ8qWc3HF3t4kEr8fO59O-~ad-ppbs-KA9nALig9mVWhuyT18NdeYaqT50t3t9vAmbGR7Nc-1c0J5Nnhbnp~ViUtKaHblXs-jrOTJWYi0nLJ-FZpZxu8JtuM-gO-yf-IEWVl-oA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+                                        }}
+                                        style={styles.incorrect_gif}
+                                    />
+                                )}
                         </Pressable>
                     )}
                     keyExtractor={item => item.answer}
@@ -129,6 +141,7 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 22,
         fontWeight: '500',
+        fontFamily: 'SF-Pro-Rounded',
     },
     correct_gif: {
         width: 40,
@@ -153,10 +166,11 @@ const styles = StyleSheet.create({
     },
     option: {
         color: '#fff',
+        fontFamily: 'SF-Pro-Rounded',
         textShadowColor: 'rgba(0, 0, 0, 0.45)',
-        textShadowOffset: {width: 1, height: 1.5},
+        textShadowOffset: { width: 1, height: 1.5 },
         textShadowRadius: 2,
         fontWeight: '500',
-        maxWidth:'90%'
+        maxWidth: '90%',
     },
 })

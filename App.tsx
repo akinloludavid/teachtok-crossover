@@ -5,9 +5,16 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import Home from './src/pages/Home'
 import Others from './src/pages/Others'
-import { AppContextProvider } from './src/context/AppContext'
-
+import { useEffect } from 'react'
+import * as Font from 'expo-font'
 export default function App() {
+    useEffect(() => {
+        (async () => {
+          await Font.loadAsync({
+            'SF-Pro-Rounded': require('./assets/fonts/SF-Pro-Rounded.ttf'),
+          });
+        })();
+      }, []);
     const queryClient = new QueryClient({
         defaultOptions: {
             queries: {
@@ -22,7 +29,6 @@ export default function App() {
 
     return (
             <QueryClientProvider client={queryClient}>
-                <AppContextProvider>
                         <NavigationContainer>
                             <Stack.Navigator initialRouteName='Home'>
                                 <Stack.Screen
@@ -37,7 +43,6 @@ export default function App() {
                                 />
                             </Stack.Navigator>
                         </NavigationContainer>
-                </AppContextProvider>
             </QueryClientProvider>
     )
 }

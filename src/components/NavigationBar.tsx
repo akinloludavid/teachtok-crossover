@@ -60,7 +60,8 @@ const styles = StyleSheet.create({
     label: {
         color: '#fff',
         fontSize:10,
-        fontWeight:'500'
+        fontWeight:'500',
+        fontFamily: 'SF-Pro-Rounded',
     },
 })
 

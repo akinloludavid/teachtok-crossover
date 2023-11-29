@@ -50,6 +50,9 @@ const styles = StyleSheet.create({
 },
 timer: {
     color: 'rgba(255, 255, 255, 0.60)',
+    fontFamily: 'SF-Pro-Rounded',
+    fontWeight:'400',
+
 },
 })
 export default CountdownTimer;
