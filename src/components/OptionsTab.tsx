@@ -32,7 +32,6 @@ export function OptionsTab({ questionData }: IQuestionOption) {
         setOptions(newOptions)
     }
     const correctAnswerId = data?.correct_options[0]?.id
-
     const revealAnswerBg = (id: string) => {
         if (selectedAnswerId) {
             if (id === correctAnswerId) {
@@ -52,24 +51,20 @@ export function OptionsTab({ questionData }: IQuestionOption) {
 
     const panResponder = useRef(
         PanResponder.create({
-            onStartShouldSetPanResponder: () => true,
+            onStartShouldSetPanResponder: () => false,
             onMoveShouldSetPanResponder: () => true,
             onPanResponderMove: (_, gestureState) => {
-                console.log(gestureState)
-                if (gestureState.dy < -50) {
-                    console.log('swiped up')
-                    setSelectedAnswerId('')
+                if (gestureState.dy < 0) {
+                        setSelectedAnswerId('')
                 }
                 if (gestureState.dy > 50) {
-                    console.log('swiped down')
-                    setSelectedAnswerId('')
+                        setSelectedAnswerId('')
                 }
             },
             onPanResponderRelease: () => {
-                console.log('swipe ended')
-                setOptions(questionOptions)
-                setSelectedAnswerId('')
-                queryClient.invalidateQueries({ queryKey: ['questions'] })
+                    setOptions(questionOptions)
+                    setSelectedAnswerId('')
+                    queryClient.invalidateQueries({ queryKey: ['questions'] })
             },
         }),
     ).current

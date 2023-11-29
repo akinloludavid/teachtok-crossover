@@ -14,3 +14,28 @@ export interface INavigation {
 export interface IChildren {
   children: React.ReactNode 
 }
+
+export interface IAppContext {
+  questionData: IPayloadObject | Record<string, any>
+}
+
+export interface IPayloadObject {
+  type: string
+  id: number
+  playlist: string
+  description: string
+  image: string
+  question: string
+  options: Option[]
+  user: User
+}
+
+export interface Option {
+  id: string
+  answer: string
+}
+
+export interface User {
+  name: string
+  avatar: string
+}

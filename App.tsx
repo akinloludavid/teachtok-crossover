@@ -17,27 +17,28 @@ export default function App() {
             },
         },
     })
+    
     const Stack = createNativeStackNavigator()
 
     return (
-        <AppContextProvider>
             <QueryClientProvider client={queryClient}>
-                <NavigationContainer>
-                    <Stack.Navigator initialRouteName='Home'>
-                        <Stack.Screen
-                            name='Home'
-                            component={Home}
-                            options={{ headerShown: false }}
-                        />
-                        <Stack.Screen
-                            name='Others'
-                            component={Others}
-                            options={{ headerShown: false }}
-                        />
-                    </Stack.Navigator>
-                </NavigationContainer>
+                <AppContextProvider>
+                        <NavigationContainer>
+                            <Stack.Navigator initialRouteName='Home'>
+                                <Stack.Screen
+                                    name='Home'
+                                    component={Home}
+                                    options={{ headerShown: false }}
+                                />
+                                <Stack.Screen
+                                    name='Others'
+                                    component={Others}
+                                    options={{ headerShown: false }}
+                                />
+                            </Stack.Navigator>
+                        </NavigationContainer>
+                </AppContextProvider>
             </QueryClientProvider>
-        </AppContextProvider>
     )
 }
 
