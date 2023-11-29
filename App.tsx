@@ -13,15 +13,15 @@ export default function App() {
             queries: {
                 retry: false,
                 refetchOnMount: false,
-                refetchOnWindowFocus:false
+                refetchOnWindowFocus: false,
             },
         },
     })
     const Stack = createNativeStackNavigator()
 
     return (
-        <AppContextProvider>
-            <QueryClientProvider client={queryClient}>
+        <QueryClientProvider client={queryClient}>
+            <AppContextProvider>
                 <NavigationContainer>
                     <Stack.Navigator initialRouteName='Home'>
                         <Stack.Screen
@@ -36,8 +36,8 @@ export default function App() {
                         />
                     </Stack.Navigator>
                 </NavigationContainer>
-            </QueryClientProvider>
-        </AppContextProvider>
+            </AppContextProvider>
+        </QueryClientProvider>
     )
 }
 

@@ -11,14 +11,17 @@ import {
     Text,
     View,
 } from 'react-native'
-import { useGetQuestions } from '../api'
+import { useAppContext } from '../context/AppContext'
+import { IAppContext, INavigation } from '../utils/types'
 import ActionBar from './ActionBar'
 import CountdownTimer from './CountdownTimer'
 import NavigationBar from './NavigationBar'
 import { OptionsTab } from './OptionsTab'
-export function PageView({navigation}:{navigation:any}) {
-    const { data: questionData } = useGetQuestions()
-
+export function PageView({navigation}:INavigation) {
+    const {answeredQuestions, questionIdx}:IAppContext = useAppContext()
+    const questionData = answeredQuestions[questionIdx]
+    console.log(questionData)
+    console.log(questionIdx)
     return (
         <SafeAreaView style={styles.safe_area} >
             <ImageBackground

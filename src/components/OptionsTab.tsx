@@ -1,35 +1,32 @@
-import { StyleSheet, FlatList, Image,  View, Text, TouchableOpacity, Pressable, PanResponder  } from 'react-native'
+import { StyleSheet, FlatList, Image,  View, Text, TouchableOpacity, Pressable, PanResponder, Button  } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 import { useGetAnswer } from '../api'
 import { useQueryClient } from '@tanstack/react-query'
+import { useAppContext } from '../context/AppContext'
+import { IAppContext } from '../utils/types'
 
 interface IQuestionOption {
     questionData: any
 }
-const sample = [
-    { id: 'A', answer: 'The Know-Nothing Party', answered: false },
-    { id: 'B', answer: 'The Immigrant Exclusion League', answered: false },
-    { id: 'C', answer: 'The American Prosperity Group', answered: false },
-]
+
 export function OptionsTab({ questionData }: IQuestionOption) {
-    const questionOptions = questionData?.options?.map((el: any) => ({
-        ...el,
-        answered: false,
-    }))
+    const {answeredQuestions, setAnsweredQuestions,questionOptions, setQuestionOptions, setQuestionIdx, questionIdx}:IAppContext = useAppContext()
     const queryClient = useQueryClient()
     const [options, setOptions] = useState(questionOptions)
     const [selectedAnswerId, setSelectedAnswerId] = useState('')
-
+    console.log(questionIdx)
     const questionId = questionData?.id
     const question = questionData?.question
     const { data } = useGetAnswer(questionId)
 
     const handleSelectOption = (optionId: string) => {
         setSelectedAnswerId(optionId)
-        const newOptions = options?.map((el: any) =>
+        const newOptions = questionOptions?.map((el: any) =>
             el.id === optionId ? { ...el, answered: true } : el,
         )
-        setOptions(newOptions)
+        setQuestionOptions([...newOptions])
+        queryClient.invalidateQueries({ queryKey: ['questions'] })
+
     }
     const correctAnswerId = data?.correct_options[0]?.id
 
@@ -55,21 +52,27 @@ export function OptionsTab({ questionData }: IQuestionOption) {
             onStartShouldSetPanResponder: () => true,
             onMoveShouldSetPanResponder: () => true,
             onPanResponderMove: (_, gestureState) => {
-                console.log(gestureState)
-                if (gestureState.dy < -50) {
-                    console.log('swiped up')
-                    setSelectedAnswerId('')
+
+                //swipe up
+                if (gestureState.dy < 0) {
+                    if(questionIdx < answeredQuestions.length -1){
+                        setQuestionIdx(questionIdx + 1)
+                        setSelectedAnswerId('')
+                    }
                 }
+                //swipe down
                 if (gestureState.dy > 50) {
-                    console.log('swiped down')
-                    setSelectedAnswerId('')
+                    // setSelectedAnswerId('')
+                    // setQuestionIdx(questionIdx - 1)
+
                 }
             },
             onPanResponderRelease: () => {
-                console.log('swipe ended')
-                setOptions(questionOptions)
+                setQuestionIdx(questionIdx+1)
                 setSelectedAnswerId('')
-                queryClient.invalidateQueries({ queryKey: ['questions'] })
+                // setOptions(questionOptions)
+                // setSelectedAnswerId('')
+                // queryClient.invalidateQueries({ queryKey: ['questions'] })
             },
         }),
     ).current
@@ -78,9 +81,11 @@ export function OptionsTab({ questionData }: IQuestionOption) {
             <View style={styles.question_wrapper}>
                 <Text style={styles.question_text}>{question}</Text>
             </View>
+            <Button title='click' onPress={()=> setQuestionIdx(questionIdx+1)} />
             <View>
                 <FlatList
                     data={questionOptions}
+                    extraData={questionOptions}
                     renderItem={({ item }) => (
                         <Pressable
                             onPress={() => handleSelectOption(item.id)}

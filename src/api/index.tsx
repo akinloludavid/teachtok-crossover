@@ -20,7 +20,7 @@ export const getAnswerById = async(id:string|number) => {
 }
 
 
-export const useGetQuestions= () => {
+export const useGetQuestions= (options={}) => {
   return useQuery({
     queryKey:['questions'],
     queryFn:getQuestions,
