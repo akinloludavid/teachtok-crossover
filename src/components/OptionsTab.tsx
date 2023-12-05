@@ -4,22 +4,17 @@ import {
     Image,
     View,
     Text,
-    TouchableOpacity,
     Pressable,
     PanResponder,
 } from 'react-native'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useGetAnswer } from '../api'
 import { useQueryClient } from '@tanstack/react-query'
 
 interface IQuestionOption {
     questionData: any
 }
-const sample = [
-    { id: 'A', answer: 'The Know-Nothing Party', answered: false },
-    { id: 'B', answer: 'The Immigrant Exclusion League', answered: false },
-    { id: 'C', answer: 'The American Prosperity Group', answered: false },
-]
+
 export function OptionsTab({ questionData }: IQuestionOption) {
     const questionOptions = questionData?.options?.map((el: any) => ({
         ...el,

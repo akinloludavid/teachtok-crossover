@@ -1,7 +1,6 @@
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import React from 'react'
 import { PageView } from '../components/PageView'
-import NavigationBar from '../components/NavigationBar'
 
 const Home = ({navigation}:{navigation:any}) => {
   return (

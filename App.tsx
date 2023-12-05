@@ -1,5 +1,4 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { StyleSheet, View } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
@@ -47,8 +46,4 @@ export default function App() {
     )
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-})
+

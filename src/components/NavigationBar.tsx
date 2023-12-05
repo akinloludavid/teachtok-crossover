@@ -7,7 +7,7 @@ import {
 } from '@expo/vector-icons'
 import { useRoute } from '@react-navigation/native'
 import { INavigation } from '../utils/types'
-const NavigationBar = ({navigation}:INavigation) => {
+const NavigationBar = ({navigation:{navigation}}:INavigation) => {
   const route = useRoute()
   const otherIconColors = route.name==='Others'? '#fff':'rgba(255, 255, 255, 0.40)'
     return (

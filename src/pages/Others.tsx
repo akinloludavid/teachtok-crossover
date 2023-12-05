@@ -2,7 +2,8 @@ import { View, Text, StyleSheet, Button } from 'react-native'
 import React from 'react'
 import { INavigation } from '../utils/types'
 
-const Others = ({navigation}:INavigation) => {
+const Others = ({navigation:{navigation}}:INavigation) => {
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Page under construction</Text>

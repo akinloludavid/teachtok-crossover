@@ -8,7 +8,7 @@ type RootStackParamList = {
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 export interface INavigation {
-  navigation:any
+  navigation:Props
 }
 
 export interface IChildren {

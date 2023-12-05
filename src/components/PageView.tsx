@@ -4,7 +4,6 @@ import {
     MaterialIcons,
 } from '@expo/vector-icons'
 import {
-    Button,
     ImageBackground,
     Pressable,
     SafeAreaView,
